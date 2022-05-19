@@ -1,6 +1,10 @@
-# Fetch and verify Render deploy 
+# Render Deploy Action
 
-This action fetches Render deploy links from PR and verifies for a successful deployment of the deloyment preview.
+### The action performs the following tasks
+- Fetches PR comment by matching against Render's comment content.
+- Extracts URLs from comment.
+- Makes an API call to Render for tracking deployment Progress using service-id extracted from Progress URL.
+- Awaits Deployment status.
 
 ## Inputs
 
@@ -47,10 +51,22 @@ jobs:
     steps:
       - name: Render Deploy Action
         id: render-deploy
-        uses: muhammad-usman-outlier/render-deploy@v1.1
+        uses: muhammad-usman-outlier/render-deploy-action@v1.0.0
         with: 
             token:
             render-email:
             render-password:
 
   ```
+  
+  ## Contribute
+  
+  GitHub Actions are run from repos, so we have to run [ncc](https://github.com/zeit/ncc) to generate the packaged dist
+  
+  ```bash
+$ npm run all
+$ git add .
+$ git commit -m "My Render Deploy Action Release"
+$ git tag -a -m "My Render Deploy Action Release" v2.0.0
+$ git push --follow-tags
+```
